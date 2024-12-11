@@ -1,0 +1,198 @@
+import streamlit as st
+import sqlite3
+import pandas as pd
+import io
+import sys
+
+# Initialize the database
+def init_db():
+    conn = sqlite3.connect('app.db')
+    c = conn.cursor()
+    # Create user table
+    c.execute('''CREATE TABLE IF NOT EXISTS users
+                 (username TEXT PRIMARY KEY, password TEXT, score INTEGER)''')
+    # Create default user
+    c.execute("INSERT OR IGNORE INTO users (username, password, score) VALUES ('khaled', 'khaled', 0)")
+    conn.commit()
+    conn.close()
+
+# Function to get user data
+def get_user(username):
+    conn = sqlite3.connect('app.db')
+    c = conn.cursor()
+    c.execute("SELECT * FROM users WHERE username = ?", (username,))
+    user = c.fetchone()
+    conn.close()
+    return user
+
+# Function to update user score
+def update_score(username, score):
+    conn = sqlite3.connect('app.db')
+    c = conn.cursor()
+    c.execute("UPDATE users SET score = ? WHERE username = ?", (score, username))
+    conn.commit()
+    conn.close()
+
+# Function to get badge based on score
+def get_badge(score):
+    if score >= 50:
+        return "Gold"
+    elif score >= 30:
+        return "Silver"
+    elif score >= 10:
+        return "Bronze"
+    else:
+        return "Iron"
+
+# Initialize the database
+init_db()
+
+# Initialize session state if not already initialized
+if 'user' not in st.session_state:
+    st.session_state.user = None
+if 'score' not in st.session_state:
+    st.session_state.score = 0
+if 'page' not in st.session_state:
+    st.session_state.page = 'login'
+if 'badge' not in st.session_state:
+    st.session_state.badge = 'Iron'
+
+# Streamlit app
+st.title("Statistical Methods Table")
+
+# Login Page
+def login_page():
+    st.write("### Login")
+    username = st.text_input("Username")
+    password = st.text_input("Password", type='password')
+
+    if st.button("Login"):
+        user = get_user(username)
+        if user and user[1] == password:
+            st.session_state.user = username
+            st.session_state.score = user[2]
+            st.session_state.badge = get_badge(st.session_state.score)
+            st.session_state.page = 'main'
+            st.experimental_rerun()
+        else:
+            st.error("Invalid username or password")
+
+# Main Page
+def main_page():
+    st.write(f"### Welcome, {st.session_state.user}")
+    st.write("Your Score: ", st.session_state.score)
+    st.write("Your Badge: ", st.session_state.badge)
+
+    # Define and display the table data
+    data = [
+        {
+            "Method": "One-Sided ANOVA",
+            "Description": "Tests if the means of several groups are significantly different from each other, focusing on one side of the distribution.",
+            "Application": "Testing for differences in group means when focusing on one side of the distribution.",
+            "Link": "one-sided-anova"
+        },
+        {
+            "Method": "Two-Sided ANOVA",
+            "Description": "Tests if the means of several groups are significantly different from each other, considering both sides of the distribution.",
+            "Application": "Testing for differences in group means considering both sides of the distribution.",
+            "Link": "two-sided-anova"
+        },
+        {
+            "Method": "Hello World Exercise",
+            "Description": "A simple exercise to print 'Hello World' and check the output.",
+            "Application": "Testing basic Python code execution.",
+            "Link": "hello-world-exercise"
+        }
+        # Add more methods as needed
+    ]
+    df = pd.DataFrame(data)
+    st.write(df)
+
+    # Add buttons for practice links
+    for index, row in df.iterrows():
+        method_name = row["Method"]
+        practice_link = row["Link"]
+        if st.button(f"Practice {method_name}"):
+            st.session_state.page = practice_link
+            st.experimental_rerun()
+
+# Exercise Page
+def exercise_page():
+    if st.session_state.page == "one-sided-anova":
+        st.title("One-Sided ANOVA Exercise")
+        st.write("### Instructions:")
+        st.write("Write your code below to perform One-Sided ANOVA.")
+
+        code = st.text_area("Python Code", height=300, key="one_sided_anova_code")
+
+        if st.button("Run Code"):
+            output = run_code(code)
+            st.write("### Output:")
+            st.code(output)
+
+            # Update score and badge
+            st.session_state.score += 10
+            update_score(st.session_state.user, st.session_state.score)
+            st.session_state.badge = get_badge(st.session_state.score)
+
+    elif st.session_state.page == "two-sided-anova":
+        st.title("Two-Sided ANOVA Exercise")
+        st.write("### Instructions:")
+        st.write("Write your code below to perform Two-Sided ANOVA.")
+
+        code = st.text_area("Python Code", height=300, key="two_sided_anova_code")
+
+        if st.button("Run Code"):
+            output = run_code(code)
+            st.write("### Output:")
+            st.code(output)
+
+            # Update score and badge
+            st.session_state.score += 10
+            update_score(st.session_state.user, st.session_state.score)
+            st.session_state.badge = get_badge(st.session_state.score)
+
+    elif st.session_state.page == "hello-world-exercise":
+        st.title("Hello World Exercise")
+        st.write("### Instructions:")
+        st.write("Write your code below to print 'Hello World'.")
+
+        code = st.text_area("Python Code", height=300, key="hello_world_code")
+
+        if st.button("Run Code"):
+            output = run_code(code)
+            if "Hello World" in output:
+                st.write("✅ Your answer is correct.")
+                # Update score and badge
+                st.session_state.score += 10
+                update_score(st.session_state.user, st.session_state.score)
+                st.session_state.badge = get_badge(st.session_state.score)
+            else:
+                st.write("❌ Your answer is incorrect. Try again.")
+
+            st.write("### Output:")
+            st.code(output)
+
+    if st.button('Back to Main Page'):
+        st.session_state.page = 'main'
+        st.experimental_rerun()
+
+# Run the code input
+def run_code(code):
+    buffer = io.StringIO()
+    sys.stdout = buffer
+    try:
+        exec(code, globals(), locals())
+    except Exception as e:
+        return str(e)
+    finally:
+        sys.stdout = sys.__stdout__
+    return buffer.getvalue()
+
+# Page routing
+if st.session_state.page == 'login':
+    login_page()
+elif st.session_state.page == 'main':
+    main_page()
+else:
+    exercise_page()
