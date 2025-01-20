@@ -170,14 +170,14 @@ class StreamlitApp:
             st.experimental_rerun()
 
     def main_page(self):
-        st.image(r"C:\Users\Blu-Ray\Desktop\WhatsApp Image 2024-12-13 at 20.47.24_3f75e257.jpg", width = 300)
+        st.image(r"WhatsApp Image 2024-12-13 at 20.47.24_3f75e257.jpg", width = 300)
         st.title("DataCraft")
         st.write('### Learn data and AI skill')
         st.write('Unlock the power of data and AI by learning Python, ChatGPT, SQL, Power BI, and earn Certifications.')
 
         st.sidebar.title("User Info")
         if st.session_state.user:
-            st.sidebar.image(r"C:\Users\Blu-Ray\Desktop\mygit\Cv\Part1\93d3e31639a4d07613de9dccdc8bd5e8.jpg", width=100)
+            st.sidebar.image(r"93d3e31639a4d07613de9dccdc8bd5e8.jpg", width=100)
             st.sidebar.write(f"**Username:** {st.session_state.user}")
             st.sidebar.write(f"**Score:** {st.session_state.score}")
             st.sidebar.write(f"**Badge:** {st.session_state.badge}")
