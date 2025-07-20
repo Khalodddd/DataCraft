@@ -77,8 +77,6 @@ Key metrics tracked:
 - **Top programming languages:** Python & SQL  
 - **Biggest challenges:** Lack of interactivity, motivation, and AI guidance
 
-![Survey Result - Preferred Learning Style](images/survey_learning_style.png) <!-- Replace with actual image -->
-![Survey Result - Programming Language Preference](images/survey_languages.png) <!-- Replace with actual image -->
 
 ---
 
@@ -86,8 +84,10 @@ Key metrics tracked:
 
 ### 🔐 User Authentication
 
-- Firebase Auth with secure session handling
-![Multi_Factor_Auth](images/Mult_Factor_Auth.png)
+![Forget Password](images/Forget_Password.png)
+
+### Firebase Auth with secure session handling
+![Cloud.png](images/cloud.png)
 
 ---
 
