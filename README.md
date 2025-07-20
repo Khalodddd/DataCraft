@@ -50,7 +50,7 @@ An open-source, gamified platform to support **data science education** at Alexa
 
 ## 🧩 System Architecture
 
-![Coding Page](<img width="804" height="424" alt="Screenshot 2025-07-21 012920" src="https://github.com/user-attachments/assets/87ae46ff-dad1-4ab9-9422-53fb13ed1bd5" />
+![Coding Page](images/Screenshot 2025-07-21 012920.png)
 ) <!-- <img width="804" height="424" alt="Screenshot 2025-07-21 012920" src="https://github.com/user-attachments/assets/3b901861-9867-482b-939c-367caec44fb1" />
 -->
 
