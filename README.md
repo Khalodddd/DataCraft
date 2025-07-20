@@ -50,7 +50,7 @@ An open-source, gamified platform to support **data science education** at Alexa
 
 ## 🧩 Coding Page
 
-![Coding Page](images/Screenshot 2025-07-21 012920.png)
+![Coding Page](images/coding_page.png)
 
 ## 📊 User Behavior Analysis
 
