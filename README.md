@@ -2,8 +2,8 @@
 
 An open-source, gamified platform to support **data science education** at Alexandria University. Built with modern technologies like **React**, **Firebase**, and AI integrations, Data Craft empowers students to practice, learn, and grow in a fun and interactive environment.
 
+## # Note current version uses (Python SQLLITE , Streamlit) , however this changed and the updates are coming soon! ;)
 ---
-
 ## 🎓 Project Summary
 
 > "Designed by students, for students."
@@ -48,15 +48,16 @@ An open-source, gamified platform to support **data science education** at Alexa
 
 ---
 
-## 🧩 Coding Page
+### 📚 Exercise Page
 
-![Coding Page](images/coding_page.png)
+- Instant results (Correct / Incorrect)
+- Tracks progress and stores submissions
+
+![Exercise Page](images/coding_page.png)
 
 ## 📊 User Behavior Analysis
 
 Over a controlled testing period (March–May 2025), 53 users interacted with the platform. Their behavior was analyzed to improve usability.
-
-![User Behavior Dashboard](images/user_behavior.png) <!-- Replace with actual image -->
 
 Key metrics tracked:
 - Page visit timestamps
@@ -86,36 +87,26 @@ Key metrics tracked:
 ### 🔐 User Authentication
 
 - Firebase Auth with secure session handling
-
-![Login Page Screenshot](images/login_page.png) <!-- Replace with actual image -->
-
----
-
-### 🏠 Home Page
-
-- Submit code via text editor
-- Get evaluated and receive immediate feedback
-
-![Home Page Screenshot](images/home_page.png) <!-- Replace with actual image -->
+![Multi_Factor_Auth](images/Mult_Factor_Auth.png)
 
 ---
 
-### 📚 Exercise Page
+### 🏠 Profile Page
 
-- Instant results (Correct / Incorrect)
-- Tracks progress and stores submissions
+- User Data
+- Score
 
-![Exercise Page - Correct Submission](images/exercise_correct.png) <!-- Replace with actual image -->
-![Exercise Page - Wrong Submission](images/exercise_wrong.png) <!-- Replace with actual image -->
+![Profile Page](images/profile.png) <!-- Replace with actual image -->
 
 ---
+
 
 ### 🧠 AI Chatbot
 
 - Ask coding questions or get hints
 - Available 24/7
 
-![Chatbot Interaction Screenshot](images/chatbot.png) <!-- Replace with actual image -->
+![Chatbot Interaction Screenshot](images/chatbot.png)
 
 ---
 
@@ -133,12 +124,9 @@ Key metrics tracked:
 
 ---
 
-## 👨‍👩‍👧‍👦 Team
 
 > Under the supervision of **Prof. Bothaina Al Sobky**
 
-### 🎓 Contributors
-- [Add Team Member Names Here]
 
 ---
 
@@ -149,6 +137,8 @@ If you’re a student, educator, or contributor—**we’d love your input**!
 Submit issues, feature requests, or questions via the [Issues tab](https://github.com/your-repo/issues) or reach out by email.
 
 ---
+## Email
+thedataanalyst159@gmail.com
 
 ## 📄 License
 
